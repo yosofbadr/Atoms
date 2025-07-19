@@ -25,3 +25,22 @@ export class BounceBehavior extends Behaviour {
     }
   }
 }
+
+export class ArcBehavior extends Behaviour {
+  arcRadius: number;
+  angle: number;
+  angleSpeed: number;
+
+  constructor(arcRadius: number, angle: number, angleSpeed: number) {
+    super();
+    this.arcRadius = arcRadius;
+    this.angle = angle;
+    this.angleSpeed = angleSpeed;
+  }
+
+  update(atom: Atom) {
+    this.angle += this.angleSpeed;
+    atom.x = atom.originX + Math.cos(this.angle) * this.arcRadius;
+    atom.y = atom.originY + Math.sin(this.angle) * this.arcRadius;
+  }
+}

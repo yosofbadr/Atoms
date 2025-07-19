@@ -1,5 +1,5 @@
 import Atom from "./atom.js";
-import { BounceBehavior } from "./behaviour.js";
+import { ArcBehavior, BounceBehavior } from "./behaviour.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   try {
@@ -19,8 +19,26 @@ document.addEventListener("DOMContentLoaded", () => {
       const y = Math.random() * canvas.height;
       const radius = Math.random() * 5 + 1;
       const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
-      const atom = new Atom(x, y, radius, color, new BounceBehavior(canvas));
-      atoms.push(atom);
+      const bounceAtom = new Atom(
+        x,
+        y,
+        radius,
+        color,
+        new BounceBehavior(canvas),
+      );
+
+      const angle = Math.random() * Math.PI * 2;
+      const angleSpeed = Math.random() * 0.02 + 0.01;
+      const arcRadius = Math.random() * 20 + 10;
+      const arcAtom = new Atom(
+        x,
+        y,
+        radius,
+        color,
+        new ArcBehavior(arcRadius, angle, angleSpeed),
+      );
+      atoms.push(bounceAtom);
+      atoms.push(arcAtom);
     }
 
     animate(ctx, canvas, atoms);

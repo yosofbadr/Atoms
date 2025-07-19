@@ -1,6 +1,8 @@
 import { Behaviour } from "./behaviour";
 
 class Atom {
+  originX: number;
+  originY: number;
   x: number;
   y: number;
   speedX: number;
@@ -18,6 +20,8 @@ class Atom {
   ) {
     this.x = x;
     this.y = y;
+    this.originX = x;
+    this.originY = y;
     this.speedX = 0.5;
     this.speedY = 0.5;
     this.radius = radius;
