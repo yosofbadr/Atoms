@@ -1,3 +1,5 @@
+import Atom from "./atom.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   try {
     const canvas: HTMLCanvasElement = <HTMLCanvasElement>(
@@ -8,16 +10,21 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.width = window.innerWidth * 0.6;
     canvas.height = window.innerHeight * 0.6;
 
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-    const radius = 50;
+    const atoms: Atom[] = [];
+    const atomCount = 250;
 
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-    ctx.fillStyle = "red";
-    ctx.fill();
-    ctx.closePath();
+    for (let atomIndex = 0; atomIndex < atomCount; atomIndex++) {
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height;
+      const radius = Math.random() * 5 + 1;
+      const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      const atom = new Atom(x, y, radius, color);
+      atoms.push(atom);
+    }
+
+    atoms.forEach((atom) => atom.draw(ctx));
   } catch (error) {
     console.error("Failed to initialize canvas:", error);
   }
 });
+
