@@ -44,3 +44,30 @@ export class ArcBehavior extends Behaviour {
     atom.y = atom.originY + Math.sin(this.angle) * this.arcRadius;
   }
 }
+
+export class SpiralBehavior extends Behaviour {
+  arcRadius: number;
+  angle: number;
+  angleSpeed: number;
+  spiralSpeed: number;
+
+  constructor(
+    arcRadius: number,
+    angle: number,
+    angleSpeed: number,
+    spiralSpeed: number,
+  ) {
+    super();
+    this.arcRadius = arcRadius;
+    this.angle = angle;
+    this.angleSpeed = angleSpeed;
+    this.spiralSpeed = spiralSpeed;
+  }
+
+  update(atom: Atom) {
+    this.angle += this.angleSpeed;
+    this.arcRadius += this.spiralSpeed;
+    atom.x = atom.originX + Math.cos(this.angle) * this.arcRadius;
+    atom.y = atom.originY + Math.sin(this.angle) * this.arcRadius;
+  }
+}

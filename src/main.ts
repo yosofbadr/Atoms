@@ -1,5 +1,5 @@
 import Atom from "./atom.js";
-import { ArcBehavior, BounceBehavior } from "./behaviour.js";
+import { ArcBehavior, BounceBehavior, SpiralBehavior } from "./behaviour.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   try {
@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const angle = Math.random() * Math.PI * 2;
       const angleSpeed = Math.random() * 0.02 + 0.01;
+      const spiralSpeed = Math.random() * 0.5 + 0.2;
       const arcRadius = Math.random() * 20 + 10;
       const arcAtom = new Atom(
         x,
@@ -37,8 +38,16 @@ document.addEventListener("DOMContentLoaded", () => {
         color,
         new ArcBehavior(arcRadius, angle, angleSpeed),
       );
+      const spiralAtom = new Atom(
+        x,
+        y,
+        radius,
+        color,
+        new SpiralBehavior(arcRadius, angle, angleSpeed, spiralSpeed),
+      );
       atoms.push(bounceAtom);
       atoms.push(arcAtom);
+      atoms.push(spiralAtom);
     }
 
     animate(ctx, canvas, atoms);
