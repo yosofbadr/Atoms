@@ -1,5 +1,6 @@
 import Atom from "./atom.js";
 import { ArcBehavior, BounceBehavior, SpiralBehavior } from "./behaviour.js";
+import Emitter from "./emitter.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   try {
@@ -8,49 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
 
-    canvas.width = window.innerWidth * 0.6;
-    canvas.height = window.innerHeight * 0.6;
+    canvas.width = window.innerWidth * 0.8;
+    canvas.height = window.innerHeight * 0.8;
 
-    const atoms: Atom[] = [];
-    const atomCount = 250;
+    const emitter = new Emitter();
 
-    for (let atomIndex = 0; atomIndex < atomCount; atomIndex++) {
-      const x = Math.random() * canvas.width;
-      const y = Math.random() * canvas.height;
-      const radius = Math.random() * 5 + 1;
-      const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
-      const bounceAtom = new Atom(
-        x,
-        y,
-        radius,
-        color,
-        new BounceBehavior(canvas),
-      );
-
-      const angle = Math.random() * Math.PI * 2;
-      const angleSpeed = Math.random() * 0.02 + 0.01;
-      const spiralSpeed = Math.random() * 0.5 + 0.2;
-      const arcRadius = Math.random() * 20 + 10;
-      const arcAtom = new Atom(
-        x,
-        y,
-        radius,
-        color,
-        new ArcBehavior(arcRadius, angle, angleSpeed),
-      );
-      const spiralAtom = new Atom(
-        x,
-        y,
-        radius,
-        color,
-        new SpiralBehavior(arcRadius, angle, angleSpeed, spiralSpeed),
-      );
-      atoms.push(bounceAtom);
-      atoms.push(arcAtom);
-      atoms.push(spiralAtom);
-    }
-
-    animate(ctx, canvas, atoms);
+    animate(ctx, canvas, emitter);
   } catch (error) {
     console.error("Failed to initialize canvas:", error);
   }
@@ -59,16 +23,24 @@ document.addEventListener("DOMContentLoaded", () => {
 const animate = (
   ctx: CanvasRenderingContext2D,
   canvas: HTMLCanvasElement,
-  atoms: Atom[],
+  emitter: Emitter,
 ) => {
   ctx.save();
   ctx.fillStyle = "rgba(245, 245, 220, 0.1)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.restore();
 
-  atoms.forEach((atom) => {
-    atom.update();
-    atom.draw(ctx);
-  });
-  requestAnimationFrame(() => animate(ctx, canvas, atoms));
+  emitter.emit(canvas.width - 10, 10, 1, new BounceBehavior(canvas));
+
+  const angle = Math.random() * Math.PI;
+  const angleSpeed = Math.random() * 0.02 + 0.01;
+  const arcRadius = Math.random() * 50 + 35;
+  emitter.emit(
+    canvas.width / 2,
+    canvas.height / 2,
+    1,
+    new ArcBehavior(arcRadius, angle, angleSpeed),
+  );
+  emitter.updateAndDraw(ctx);
+  requestAnimationFrame(() => animate(ctx, canvas, emitter));
 };

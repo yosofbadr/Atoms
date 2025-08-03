@@ -10,6 +10,7 @@ class Atom {
   radius: number;
   color: string;
   behaviour: Behaviour;
+  lifespan: number;
 
   constructor(
     x: number,
@@ -17,16 +18,18 @@ class Atom {
     radius: number,
     color: string,
     behaviour: Behaviour,
+    lifespan: number,
   ) {
     this.x = x;
     this.y = y;
     this.originX = x;
     this.originY = y;
-    this.speedX = 0.5;
-    this.speedY = 0.5;
+    this.speedX = Math.random() * 0.8;
+    this.speedY = Math.random() * 0.8;
     this.radius = radius;
     this.color = color;
     this.behaviour = behaviour;
+    this.lifespan = lifespan;
   }
 
   draw(ctx: CanvasRenderingContext2D) {
@@ -44,6 +47,8 @@ class Atom {
 
   update() {
     this.behaviour.update(this);
+    this.lifespan -= 0.1;
+    this.radius -= 0.015;
   }
 }
 
