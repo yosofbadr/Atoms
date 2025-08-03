@@ -27,7 +27,7 @@ export default class Emitter {
         radius,
         color,
         behaviour,
-        Math.random() * 100 + 10,
+        Math.random() * 1,
       );
 
       this.atoms.push(arcAtom);

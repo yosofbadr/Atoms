@@ -36,18 +36,15 @@ class Atom {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
     ctx.fillStyle = this.color;
+    ctx.globalAlpha = this.lifespan;
     ctx.fill();
     ctx.closePath();
-  }
-
-  updatePosition() {
-    this.x += 0.1;
-    this.y += 0.1;
+    ctx.globalAlpha = 1;
   }
 
   update() {
     this.behaviour.update(this);
-    this.lifespan -= 0.1;
+    this.lifespan -= 0.001;
     this.radius -= 0.015;
   }
 }

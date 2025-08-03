@@ -9,7 +9,7 @@ class Palette {
       ["#FAD0C9", "#C8C8A9", "#83AE9B", "#698474", "#4B4453"],
       ["#E6E6FA", "#D8BFD8", "#DDA0DD", "#DA70D6", "#BA55D3"],
     ];
-    this.currentPaletteIndex = 0;
+    this.currentPaletteIndex = 1;
   }
 
   getCurrentPalette() {
