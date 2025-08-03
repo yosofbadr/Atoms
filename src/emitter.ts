@@ -17,10 +17,6 @@ export default class Emitter {
 
       const color = this.palette.getRandomColor();
 
-      // const angle = Math.random() * Math.PI * 2;
-      // const angleSpeed = Math.random() * 0.02 + 0.01;
-      // const arcRadius = Math.random() * 20 + 10;
-
       const arcAtom = new Atom(
         x,
         y,
