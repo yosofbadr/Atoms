@@ -16,3 +16,29 @@ body {
 #canvas {
   border: 1px solid #ccc;
 }
+
+.palette-selector-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.palette-option {
+  display: flex;
+  border: 2px solid transparent;
+  cursor: pointer;
+  margin: 0 5px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.palette-option:hover {
+  border-color: #666;
+}
+
+.color-swatch {
+  width: 20px;
+  height: 20px;
+  margin: 2px;
+  border-radius: 3px;
+}

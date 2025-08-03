@@ -15,6 +15,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const palette = new Palette();
     const emitter = new Emitter(palette);
 
+    const paletteSelectorContainer = document.getElementById("palette-selector-container");
+
+    palette.palettes.forEach((p, index) => {
+      const paletteDiv = document.createElement("div");
+      paletteDiv.classList.add("palette-option");
+      paletteDiv.dataset.paletteIndex = index.toString();
+
+      p.forEach(color => {
+        const colorSwatch = document.createElement("div");
+        colorSwatch.classList.add("color-swatch");
+        colorSwatch.style.backgroundColor = color;
+        paletteDiv.appendChild(colorSwatch);
+      });
+
+      paletteDiv.addEventListener("click", () => {
+        palette.setCurrentPalette(index);
+      });
+
+      paletteSelectorContainer?.appendChild(paletteDiv);
+    });
+
     animate(ctx, canvas, emitter);
   } catch (error) {
     console.error("Failed to initialize canvas:", error);
