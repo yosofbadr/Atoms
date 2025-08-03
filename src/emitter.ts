@@ -1,17 +1,21 @@
 import Atom from "./atom.js";
-import { Behaviour, ArcBehavior } from "./behaviour";
+import { Behaviour } from "./behaviour";
+import Palette from "./palette.js";
 
 export default class Emitter {
   atoms: Atom[];
+  palette: Palette;
 
-  constructor() {
+  constructor(palette: Palette) {
     this.atoms = [];
+    this.palette = palette;
   }
 
   emit(x: number, y: number, count: number, behaviour: Behaviour): void {
     for (let i = 0; i < count; i++) {
       const radius = Math.random() * 10 + 1;
-      const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+
+      const color = this.palette.getRandomColor();
 
       // const angle = Math.random() * Math.PI * 2;
       // const angleSpeed = Math.random() * 0.02 + 0.01;

@@ -1,6 +1,6 @@
-import Atom from "./atom.js";
-import { ArcBehavior, BounceBehavior, SpiralBehavior } from "./behaviour.js";
+import { ArcBehavior, BounceBehavior } from "./behaviour.js";
 import Emitter from "./emitter.js";
+import Palette from "./palette.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   try {
@@ -12,7 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.width = window.innerWidth * 0.8;
     canvas.height = window.innerHeight * 0.8;
 
-    const emitter = new Emitter();
+    const palette = new Palette();
+    const emitter = new Emitter(palette);
 
     animate(ctx, canvas, emitter);
   } catch (error) {
